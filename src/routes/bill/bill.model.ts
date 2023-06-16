@@ -1,4 +1,4 @@
-import { RowDataPacket } from "mysql2";
+import { RowDataPacket } from 'mysql2'
 
 interface IBillItem {
   id: number
@@ -9,7 +9,7 @@ interface IBillItem {
   quantity: number
 }
 
-export interface IBill extends RowDataPacket{
+export interface IBill extends RowDataPacket {
   id: number
   uuid: string
   name: string
