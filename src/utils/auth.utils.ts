@@ -11,10 +11,10 @@ const issueJWT = (user: { email: string, name: string, role: string}) => {
         iat: Date.now(),
         name, role
     }
-    const signedJWT = jwt.sign(payload, PRIVATE_KEY, { expiresIn: '1d', algorithm: 'RS256' })
+    const signedJWT = jwt.sign(payload, PRIVATE_KEY, { expiresIn: '30d', algorithm: 'RS256' })
     return {
         token: 'Bearer ' + signedJWT,
-        expiresIn: '1d'
+        expiresIn: '30d'
     }
 }
 

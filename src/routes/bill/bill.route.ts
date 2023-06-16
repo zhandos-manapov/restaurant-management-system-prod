@@ -1,5 +1,5 @@
 import express from 'express'
-import { createBill, deleteBill, getBills, getPdf, updateBill } from '../controllers/bill.controller'
+import { createBill, deleteBill, getBills, getPdf, updateBill } from './bill.controller'
 
 const router = express.Router()
 

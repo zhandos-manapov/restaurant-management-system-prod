@@ -1,6 +1,6 @@
 import express from 'express'
-import { createCategory, getCategories, updateCategory } from '../controllers/category.controller'
-import isAdmin from '../middleware/checkAdmin.middleware'
+import { createCategory, getCategories, updateCategory } from './category.controller'
+import isAdmin from '../../middleware/checkAdmin.middleware'
 
 const router = express.Router()
 

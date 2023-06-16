@@ -5,3 +5,5 @@
 /package-lock.json
 /generated_pdf
 /src/keys
+/cafedb.session.sql
+/.vscode

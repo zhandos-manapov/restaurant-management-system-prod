@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
-import promisePool from '../index'
+import { promisePool } from "../../connection";
+import { IDashboardInfo } from "./dashboardInfo.model";
 
 const getDashboardDetails = async (req: Request, res: Response) => {
 
@@ -16,7 +17,7 @@ const getDashboardDetails = async (req: Request, res: Response) => {
     [rows, fields] = await promisePool.query(query)
     const { bill_count } = rows[0]
 
-    return res.status(200).json({ category_count, product_count, bill_count })
+    return res.status(200).json({ category_count, product_count, bill_count } as IDashboardInfo)
 }
 
 export {

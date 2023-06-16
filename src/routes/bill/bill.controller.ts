@@ -1,24 +1,22 @@
-import promisePool from '../index'
+import { promisePool } from '../../connection';
 import uuid from 'uuid'
 import ejs from 'ejs'
 import html_to_pdf from 'html-pdf-node'
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ResultSetHeader } from 'mysql2';
-import { BadRequestError, NotFoundError } from '../errors';
+import { BadRequestError, NotFoundError } from '../../errors';
 
 
 const getBills = async (req: Request, res: Response) => {
     let query = 'select * from bill order by id desc'
     const [rows, fields]: [any, any] = await promisePool.execute(query)
-    console.log(rows);
     res.status(StatusCodes.OK).json(rows)
 }
 
 const createBill = async (req: Request, res: Response) => {
     const gen_uuid = uuid.v1()
     const order_details = req.body
-    console.log(order_details)
     let query = `
         insert into bill(name, uuid, email, contact_number, payment_method, total, product_details, created_by)
         values(?,?,?,?,?,?,?,?)`
@@ -59,9 +57,10 @@ const updateBill = async (req: Request, res: Response) => {
 
 const getPdf = async (req: Request, res: Response) => {
     const order_details = req.body
+    console.log(order_details)
     ejs.renderFile(`${__dirname}/../report.ejs`, { ...order_details }, (err, str: string) => {
         if (err) throw err
-        html_to_pdf.generatePdf({ content: str }, { format: 'A5', path: `../../generated_pdf/${order_details.uuid}.pdf` }, (err, buffer) => {
+        html_to_pdf.generatePdf({ content: str }, { format: 'A5', path: `./../../generated_pdf/${order_details.uuid}.pdf` }, (err, buffer) => {
             if (err) throw err
             res.status(StatusCodes.OK).send(buffer)
         })

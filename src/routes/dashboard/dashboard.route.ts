@@ -1,5 +1,5 @@
 import expess from 'express'
-import { getDashboardDetails } from '../controllers/dashboard.controller'
+import { getDashboardDetails } from './dashboard.controller'
 
 const router = expess.Router()
 
