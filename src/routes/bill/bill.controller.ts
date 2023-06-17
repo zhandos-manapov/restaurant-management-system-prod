@@ -1,5 +1,5 @@
 import { promisePool } from '../../connection'
-import uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import ejs from 'ejs'
 import html_to_pdf from 'html-pdf-node'
 import { Request, Response } from 'express'
@@ -15,7 +15,7 @@ const getBills = async (req: Request, res: Response) => {
 }
 
 const createBill = async (req: Request, res: Response) => {
-  const gen_uuid = uuid.v1()
+  const gen_uuid = uuidv4()
   const order_details: IBill = req.body
   let query = `
         insert into bill(name, uuid, email, contact_number, payment_method, total, product_details, created_by)
