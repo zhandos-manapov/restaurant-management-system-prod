@@ -7,3 +7,5 @@
 /src/keys
 /cafedb.session.sql
 /.vscode
+/dist
+/app.env

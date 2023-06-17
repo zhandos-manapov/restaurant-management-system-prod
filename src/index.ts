@@ -1,5 +1,5 @@
 import 'express-async-errors'
-import express, { Express, urlencoded, json } from 'express'
+import express, { Express, urlencoded, json, Request, Response } from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -23,6 +23,7 @@ app.use(urlencoded({ extended: true }))
 app.use(json())
 app.use(morgan('short'))
 
+app.get('/', (req: Request, res: Response) => res.send('Server working!'))
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/user', authorize, userRoute)
 app.use('/api/v1/category', authorize, categoryRoute)
