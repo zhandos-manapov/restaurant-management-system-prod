@@ -3,6 +3,7 @@ import express, { Express, urlencoded, json, Request, Response } from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 import morgan from 'morgan'
+import { readFile } from 'fs/promises'
 
 //Routes
 import authRouter from './routes/auth/auth.route'
@@ -24,6 +25,10 @@ app.use(json())
 app.use(morgan('short'))
 
 app.get('/', (req: Request, res: Response) => res.send('Server working!'))
+app.get('/.well-known/pki-validation/', async (req: Request, res: Response) => {
+  const result = await readFile('./5F50110576AEA41DE62126CE8D01E9BB.txt')
+  res.send(result)
+})
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/user', authorize, userRoute)
 app.use('/api/v1/category', authorize, categoryRoute)
